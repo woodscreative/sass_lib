@@ -1,0 +1,56 @@
+//---------------------------------------------------------
+// Keyframes Prefixed Mixin
+// @param string $name Animation name
+// @see https://developer.mozilla.org/en/docs/Web/CSS/@keyframes
+// @example
+// @include keyframes(myanim) {
+//  from {
+//  }
+//  to {
+//  } 
+// };
+//---------------------------------------------------------
+
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+//---------------------------------------------------------
+// Animate Mixin
+// Creates vendor prefixed longhand animation.
+// @see: https://developer.mozilla.org/en-US/docs/Web/CSS/animation
+// @example
+// @include animate((
+//    name : myanim,
+//    duration : 1000ms,
+//    timing-function : ease-out,
+//    fill-mode : both
+// ));
+//---------------------------------------------------------
+
+@mixin animate($conf : ()) {
+  $props : (
+    "name", 
+    "duration", 
+    "timing-function", 
+    "delay", 
+    "iteration-count", 
+    "direction", 
+    "fill-mode", 
+    "play-state"
+  );
+  $max : length($props);
+  @for $i from 1 through $max {
+    $p : nth($props, $i);
+    $v : map-get($conf, $p);
+    @if ($v) {
+      -webkit-animation-#{$p}: $v;
+      animation-#{$p}: $v;
+    }
+  }
+}
