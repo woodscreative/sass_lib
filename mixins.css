@@ -32,27 +32,20 @@
 }
 
 //---------------------------------------------------------
-// Vendor Prefix Mixin
-// Generates vendor prefixes.
-// @see https://github.com/thoughtbot/bourbon/core/bourbon/addons/_prefixer.scss
+// Generate vendor prefixes
+// @see https://github.com/thoughtbot/bourbon/blob/master/core/bourbon/library/_prefixer.scss
+// @include prefixer(appearance, none, ("webkit", "moz"));
 //---------------------------------------------------------
 
-@mixin prefix($property, $value, $prefixes) {
+@mixin prefixer(
+  $property,
+  $value,
+  $prefixes: ()
+) {
   @each $prefix in $prefixes {
-    @if $prefix == webkit {
-      -webkit-#{$property}: $value;
-    } @else if $prefix == moz {
-      -moz-#{$property}: $value;
-    } @else if $prefix == ms {
-      -ms-#{$property}: $value;
-    } @else if $prefix == o {
-      -o-#{$property}: $value;
-    } @else if $prefix == spec {
-      #{$property}: $value;
-    } @else  {
-      @warn "Unrecognized prefix: #{$prefix}";
-    }
+    #{"-" + $prefix + "-" + $property}: $value;
   }
+  #{$property}: $value;
 }
 
 //---------------------------------------------------------
@@ -61,5 +54,5 @@
 //---------------------------------------------------------
 
 @mixin transform($property) {
-  @include prefix(transform, #{$property}, webkit ms spec);
+  @include prefixer(transform, #{$property}, ("webkit","ms"));
 }
