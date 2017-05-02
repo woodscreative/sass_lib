@@ -1,0 +1,32 @@
+$ratio : (
+  square : 100%,
+  16-9 : 56.25%,
+  43 : 75%,
+  32 : 66.66%,
+  a4landscape : 70.7%,
+  a4portrait : 14.1%
+);
+@function ratio($key) {
+  @return map-get($ratio, $key);
+}
+
+// Fix contents aspect ratio
+.aperture {
+  display: inline-block;
+  background-color: red;
+  position: relative;
+  width: 33.333%;
+}
+.aperture_inner {
+  position: relative;
+}
+.aperture_ratio-square {
+  .aperture_inner {
+    padding-bottom: ratio(square);
+  }
+}
+.aperture_ratio-16-9 {
+  .aperture_inner {
+    padding-bottom: ratio(16-9);
+  }
+}

@@ -1,0 +1,14 @@
+.aperture {
+  display: inline-block;
+  background-color: red;
+  position: relative;
+  width: 33.333%; }
+
+.aperture_inner {
+  position: relative; }
+
+.aperture_ratio-square .aperture_inner {
+  padding-bottom: 100%; }
+
+.aperture_ratio-16-9 .aperture_inner {
+  padding-bottom: 56.25%; }
