@@ -1,0 +1,22 @@
+// Align vertical/middle hack
+// @see https://css-tricks.com/centering-in-the-unknown/
+.view {
+  position: absolute;
+  text-align: center;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;     
+}
+.view:before {
+  content: '\200B';
+  display: inline-block;
+  height: 100%; 
+  vertical-align: middle;
+}
+.view_inner {
+  display: inline-block;
+  vertical-align: middle;
+  width: 70%;
+  height: 70%;    
+}
