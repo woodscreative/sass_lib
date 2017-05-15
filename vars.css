@@ -15,6 +15,9 @@ $grid-breaks  : (
   desktop : $grid-desktop, 
   wide    : $grid-wide
 );
+@function grid($k) {
+  @return map-get($grid-breaks,$k);
+};
 
 /* !-- vars.css | Animation/Easing ------------------------------ */
 
