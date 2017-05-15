@@ -1,3 +1,40 @@
+/* !-- mixins.css | Media Queries ------------------------------ */
+
+//---------------------------------------------------------
+// Media Query Mixin
+// Mobile first media queries.
+// @param string $from break
+// @param string $until break
+// @dependancies grid()
+// @example @include mq(mobile) {}
+// @example @include mq(mobile,tablet) {}
+//---------------------------------------------------------
+
+@mixin mq(
+  $from: false,
+  $until: false
+) {
+  $query : false;
+  $min : false;
+  $max : false;
+  @if $from {
+    $fromUnit : grid($from);
+    $min : "(min-width:#{$fromUnit})";
+    $query : $min;
+  }
+  @if $until {
+    $untilUnit : grid($until)-0.1;
+    $max : "(max-width:#{$untilUnit})";
+    $query : $max;
+  }
+  @if $min and $max {
+    $query : "(min-width:#{$fromUnit}) and (max-width:#{$untilUnit})";
+  }
+  @media #{$query} {
+    @content;
+  }
+}
+
 //---------------------------------------------------------
 // Clearfix Mixin
 // @see http://nicolasgallagher.com/
